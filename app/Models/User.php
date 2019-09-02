@@ -49,11 +49,16 @@ class User extends Authenticatable
         $hash = md5(strtolower(trim($this->attributes['email'])));
         return $this->gravatarLink . $hash . '?s=' . $size;
     }
-    public static function boot(){
+    public static function boot()
+    {
         parent::boot();
 
         static::creating(function ($user) {
             $user->activation_token = Str::random(10);
         });
+    }
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
     }
 }
