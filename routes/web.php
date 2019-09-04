@@ -23,6 +23,11 @@ Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('login', 'SessionsController@destroy')->name('logout');
 
 /**
+ * 发布微博或删除
+ */
+Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy']]);
+
+/**
  * 验证激活邮箱
  */
 Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');
