@@ -28,6 +28,12 @@ Route::delete('login', 'SessionsController@destroy')->name('logout');
 Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy']]);
 
 /**
+ * 粉丝与关注
+ */
+Route::get('/users/{user}/followings', 'UsersController@followings')->name('users.followings');
+Route::get('/users/{user}/followers', 'UsersController@followers')->name('users.followers');
+
+/**
  * 验证激活邮箱
  */
 Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');

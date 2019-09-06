@@ -19,6 +19,33 @@ class UsersController extends Controller
             'only' => ['create']
         ]);
     }
+    /**
+     * 用户关注的人
+     * @param \App\Models\User $user
+     * @return void
+     */
+    public function followings(User $user)
+    {
+        $users = $user->followings()->paginate(30);
+        $title = $user->name . '关注的人';
+        return view('users.show_follow', compact('users', 'title'));
+    }
+    /**
+     * 关注我的人
+     * @param \App\Models\User $user
+     * @return void
+     */
+    public function followers(User $user)
+    {
+        $users = $user->followers()->paginate(30);
+        $title = $user->name . '的粉丝';
+        return view('users.show_follow', compact('users', 'title'));
+    }
+    /**
+     * 发送Email验证信息
+     * @param [type] $user
+     * @return void
+     */
     protected function sendEmailConfirmationTo($user)
     {
         $view = 'emails.confirm';
